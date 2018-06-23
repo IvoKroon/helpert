@@ -1,0 +1,12 @@
+# Node
+node_modules/
+
+# Jetbrains
+.idea/
+
+# Project
+dist/
+
+yarn.lock*
+yarn-error.log*
+*.log

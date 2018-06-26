@@ -10,9 +10,10 @@ import ArrowIcon from '../icons/ArrowIcon';
 
 const Holder = styled.div`
   position: fixed;
-  height: 150px;
+  height: 60px;
   background: #061456;
   min-width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,41 +26,38 @@ const LeftSide = styled.div`
   display: flex;
   align-items: center;
 `;
-const Settings = styled.div`
-  margin-right: 30px;
-`;
 
 const PointsHolder = styled.div`
-  margin-right: 50px;
+  margin-right: 25px;
 `;
 
 const Points = styled.div`
   text-align: center;
-  font-size: 46px;
+  font-size: 18px;
   color: #00ac5b;
   font-weight: bold;
 `;
 
 const PointsTitle = styled.div`
-  font-size: 24px;
+  font-size: 12px;
   color: white;
   text-align: center;
 `;
 
 const User = styled.img`
-  margin-right: 40px;
-  width: 70px;
-  height: 70px;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
   object-fit: cover;
   border-radius: 50%;
 `;
 const BackIconHolder = styled.div`
-  margin-right: 30px;
+  margin-right: 10px;
 `;
 const LogoBackButtonHolder = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 40px;
+  margin-left: 20px;
 `;
 
 const Header = props => (

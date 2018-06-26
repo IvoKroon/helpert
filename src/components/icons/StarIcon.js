@@ -8,7 +8,7 @@ const style = css`
 `;
 
 const StarIcon = () => (
-  <svg width="35" height="35" className={style} viewBox="0 0 42.16 40.1">
+  <svg width="15" height="15" className={style} viewBox="0 0 42.16 40.1">
     <defs />
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">

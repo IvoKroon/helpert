@@ -25,7 +25,7 @@ const style = css`
 const LogoIcon = () => (
   <svg
     height="100%"
-    width="250"
+    width="100"
     xmlns="http://www.w3.org/2000/svg"
     className={style}
     viewBox="0 0 259.94 80.42"

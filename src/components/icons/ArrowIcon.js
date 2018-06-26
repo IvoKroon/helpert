@@ -11,7 +11,7 @@ const style = css`
 const ArrowIcon = () => (
   <svg
     transform="rotate(180)"
-    height="50"
+    height="25"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="1017.939 2373.939 13.182 22.121"
   >

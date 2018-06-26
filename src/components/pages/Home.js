@@ -7,54 +7,14 @@ import Row from '../list/Row';
 import firebase from '../general/firebaseConfig';
 import Loader from '../general/Loader';
 
-const Header = styled.div`
-  height: 150px;
-  background: #061456;
-  min-width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Logo = styled.div`
-  margin-left: 40px;
-`;
-
-const LeftSide = styled.div`
-  display: flex;
-`;
-const Settings = styled.div`
-  margin-right: 20px;
-`;
-
-const PointsHolder = styled.div`
-  margin-right: 40px;
-`;
-
-const Points = styled.div`
-  text-align: center;
-  font-size: 46px;
-  color: #00ac5b;
-  font-weight: bold;
-`;
-
-const PointsTitle = styled.div`
-  font-size: 24px;
-  color: white;
-  text-align: center;
-`;
-
-const User = styled.div`
-  margin-right: 20px;
-`;
-
 const Holder = styled.div`
   min-height: 100%;
+  max-width: 100%;
 `;
 
 const Head = styled.div`
-  font-size: 40px;
-  margin-top: 30px;
+  font-size: 20px;
+  margin-top: 15px;
 `;
 
 const Tag = styled.div`
@@ -67,8 +27,8 @@ const TagAmount = styled.div`
 `;
 
 const HolderTable = styled.div`
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 export default class Home extends React.Component {

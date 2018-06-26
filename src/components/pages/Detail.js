@@ -6,44 +6,44 @@ const TaskInfoHolder = styled.div`
   background: #00ac5b;
   text-align: center;
   color: #061456;
-  padding-bottom: 50px;
+  padding-bottom: 25px;
 `;
 const TaskTag = styled.div`
   color: white;
-  padding-top: 50px;
+  padding-top: 25px;
 `;
 const TaskTitle = styled.h2`
   color: white;
-  font-size: 90px;
-  margin-top: 10px;
+  font-size: 40px;
+  margin-top: 5px;
 `;
 
 const TaskDayIcon = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const TasksPoints = styled.div`
   font-weight: bold;
-  margin-top: 25px;
+  margin-top: 15px;
 `;
 
 const TasksDay = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const Text = styled.div`
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   background: #061456;
   color: #ffffff;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const UserHolder = styled.div`
-  margin-left: 40px;
-  margin-top: 40px;
-  margin-right: 60px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-right: 30px;
 `;
 const UserContainer = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const UserContainer = styled.div`
 
 const Name = styled.h1`
   color: #061456;
-  font-size: 90px;
+  font-size: 35px;
 `;
 
 const StartIconHolder = styled.div`
@@ -67,7 +67,7 @@ const RatingHolder = styled.div`
 
 const KmValue = styled.div`
   text-align: center;
-  font-size: 90px;
+  font-size: 35px;
   color: #00ac5b;
   font-weight: bold;
 `;
@@ -76,20 +76,20 @@ const KmLabel = styled.div`
 `;
 
 const UserBio = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 const Button = styled.div`
   position: absolute;
-  bottom: 40px;
-  left: 40px;
-  right: 40px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background: #00ac5b;
   color: white;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
 `;
 

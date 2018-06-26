@@ -34,10 +34,9 @@ injectGlobal(`
 
   body{
     font-family: arial;
-    font-size:40px;
+    font-size:16px;
      color:${TextColor};
     position:relative;
-    padding-bottom: 6rem;
     min-height: 100%;
     background: #F4F4F5;
   }
@@ -49,7 +48,7 @@ injectGlobal(`
 `);
 
 const Container = styled.div`
-  padding-top: 150px;
+  padding-top: 60px;
 `;
 
 const NoMatch = () => (

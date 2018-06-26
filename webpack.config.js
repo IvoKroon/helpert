@@ -1,5 +1,5 @@
 const path = require('path');
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const buildDirectoryName = './dist';
@@ -49,10 +49,12 @@ const client = {
 
   module: moduleObj,
   plugins: [
+    new UglifyJSPlugin({
+      sourceMap: true,
+    }),
     new HtmlWebPackPlugin({
       template: 'src/index.html',
       favicon: 'src/icon/favicon-16x16.png',
-
     }),
   ],
 };

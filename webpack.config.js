@@ -51,6 +51,8 @@ const client = {
   plugins: [
     new HtmlWebPackPlugin({
       template: 'src/index.html',
+      favicon: 'src/icon/favicon-16x16.png',
+
     }),
   ],
 };

@@ -49,9 +49,9 @@ const client = {
 
   module: moduleObj,
   plugins: [
-    new UglifyJSPlugin({
-      sourceMap: true,
-    }),
+    // new UglifyJSPlugin({
+    //   sourceMap: true,
+    // }),
     new HtmlWebPackPlugin({
       template: 'src/index.html',
       favicon: 'src/icon/favicon-16x16.png',

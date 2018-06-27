@@ -5,6 +5,7 @@ import StarIcon from '../icons/StarIcon';
 import SunIcon from '../icons/SunIcon';
 import NoonIcon from '../icons/NoonIcon';
 import MoonIcon from '../icons/MoonIcon';
+import { CapitalizeFirstLetter } from '../general/Functions';
 
 const Holder = styled.div`
   background: white;
@@ -89,7 +90,7 @@ export default class Row extends React.Component {
       <Link to={`/detail/${this.props.data.id}`}>
         <Holder>
           <MainData>
-            <Title>{this.props.data.title}</Title>
+            <Title>{CapitalizeFirstLetter(this.props.data.title)}</Title>
             <RatingHolder>
               4.1
               <StartIconHolder>

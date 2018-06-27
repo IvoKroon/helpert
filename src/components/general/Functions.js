@@ -6,4 +6,6 @@ export const Random = () => {
   );
 };
 
-export default { Random };
+export const CapitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
+
+export default { Random, CapitalizeFirstLetter };

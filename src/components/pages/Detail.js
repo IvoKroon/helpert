@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import StarIcon from '../icons/StarIcon';
 import firebase from '../general/firebaseConfig';
 import Loader from '../general/Loader';
+import { CapitalizeFirstLetter } from '../general/Functions';
 
 const TaskInfoHolder = styled.div`
   background: #00ac5b;
@@ -146,7 +147,7 @@ class Detail extends React.Component {
           <TaskTag>
             {this.state.task.helping ? 'Jij helpt mij met ...' : 'Help mij met ...'}
           </TaskTag>
-          <TaskTitle>{this.state.task.title}</TaskTitle>
+          <TaskTitle>{CapitalizeFirstLetter(this.state.task.title)}</TaskTitle>
           <TaskDayIcon>@</TaskDayIcon>
           <TasksPoints> 100 PUNTEN </TasksPoints>
           <TasksDay> 1 dag geleden </TasksDay>

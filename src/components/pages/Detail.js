@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'react-emotion';
+import Redirect from 'react-router-dom/Redirect';
+import { withRouter, Link } from 'react-router-dom';
 import StarIcon from '../icons/StarIcon';
+import firebase from '../general/firebaseConfig';
+import Loader from '../general/Loader';
 
 const TaskInfoHolder = styled.div`
   background: #00ac5b;
@@ -80,46 +84,69 @@ const UserBio = styled.div`
 `;
 
 const Button = styled.div`
+  cursor: pointer;
   position: absolute;
   bottom: 20px;
   left: 20px;
   right: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-  background: #00ac5b;
+  background: ${props => (props.helping ? 'red' : '#00ac5b')};
   color: white;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
 `;
 
-export default class Detail extends React.Component {
+class Detail extends React.Component {
   constructor(props) {
     super(props);
     this.searchTerm = '';
     this.state = {
-      tasks: [],
+      task: null,
       loader: true,
+      redirect: false,
     };
   }
 
-  //   componentDidMount() {
-  //     // firebas
-  //     firebase
-  //       .database()
-  //       .ref('/tasks')
-  //       .once('value', (data) => {
-  //         const tasks = Object.values(data.val());
-  //         this.setState({ tasks, loader: false });
-  //       });
-  //   }
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    firebase
+      .database()
+      .ref(`/tasks/${id}`)
+      .on('value', (data) => {
+        this.setState({ loader: false, task: data.val() });
+      });
+  }
+
+  clickEvent() {
+    const { id } = this.props.match.params;
+    console.log(this.state.task.title);
+    firebase
+      .database()
+      .ref(`/tasks/${id}`)
+      .update({ helping: !this.state.task.helping })
+      .then(() => {
+        console.log('DONE');
+      });
+    // this.setState({ redirect: true });
+  }
 
   render() {
+    console.log(this.state.task);
+    if (this.state.loader) {
+      return <Loader />;
+    }
+    if (this.state.redirect) {
+      return <Redirect to="" />;
+    }
     return (
       <div>
         <TaskInfoHolder>
-          <TaskTag>Help mij met ...</TaskTag>
-          <TaskTitle>GRASMAAIEN</TaskTitle>
+          <TaskTag>
+            {this.state.task.helping ? 'Jij helpt mij met ...' : 'Help mij met ...'}
+          </TaskTag>
+          <TaskTitle>{this.state.task.title}</TaskTitle>
           <TaskDayIcon>@</TaskDayIcon>
           <TasksPoints> 100 PUNTEN </TasksPoints>
           <TasksDay> 1 dag geleden </TasksDay>
@@ -145,9 +172,12 @@ export default class Detail extends React.Component {
             </div>
           </UserContainer>
           <UserBio>Hallo, Ik heb moeite met lopen. Ik stel hulp erg op prijs.</UserBio>
-          <Button>HELPEN</Button>
+          <Button helping={this.state.task.helping} onClick={() => this.clickEvent()}>
+            {this.state.task.helping ? 'NIET MEER HELPEN' : 'HELPEN'}
+          </Button>
         </UserHolder>
       </div>
     );
   }
 }
+export default withRouter(Detail);

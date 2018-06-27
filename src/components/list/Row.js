@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'react-emotion';
 import { Link } from 'react-router-dom';
 import StarIcon from '../icons/StarIcon';
+import SunIcon from '../icons/SunIcon';
+import NoonIcon from '../icons/NoonIcon';
+import MoonIcon from '../icons/MoonIcon';
 
 const Holder = styled.div`
   background: white;
@@ -24,6 +27,7 @@ const Title = styled.div`
 const RatingHolder = styled.div`
   margin-top: 5px;
   display: flex;
+  align-items: center;
   font-size: 20px;
   font-weight: bold;
 `;
@@ -53,7 +57,11 @@ const DataTitle = styled.div`
 `;
 
 const StartIconHolder = styled.div`
-  margin-left: 5px;
+  margin-left: 2px;
+`;
+
+const DayPart = styled.div`
+  margin-left: 15px;
 `;
 
 export default class Row extends React.Component {
@@ -68,17 +76,26 @@ export default class Row extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+    let icon = null;
+    if (this.props.data.morning) {
+      icon = <NoonIcon />;
+    } else if (this.props.data.evening) {
+      icon = <MoonIcon />;
+    } else {
+      icon = <SunIcon />;
+    }
     return (
-      <Link to="/detail">
+      <Link to={`/detail/${this.props.data.id}`}>
         <Holder>
           <MainData>
-            <Title>{this.props.title}</Title>
+            <Title>{this.props.data.title}</Title>
             <RatingHolder>
               4.1
               <StartIconHolder>
                 <StarIcon />
               </StartIconHolder>
-              <div>@</div>
+              <DayPart>{icon}</DayPart>
             </RatingHolder>
           </MainData>
           <RightSide>

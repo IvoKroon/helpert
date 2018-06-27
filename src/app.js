@@ -64,7 +64,7 @@ const App = () => (
       <Container>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/detail" component={Detail} />
+          <Route exact path="/detail/:id" component={Detail} />
           <Route component={NoMatch} />
         </Switch>
       </Container>

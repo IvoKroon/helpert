@@ -3,6 +3,7 @@ import styled from 'react-emotion';
 // import { MainContainer, Grey } from '../general/GlobalCss';
 import BoxIcon from '../icons/BoxIcon';
 import LogoIcon from '../icons/LogoIcon';
+
 import Row from '../list/Row';
 import firebase from '../general/firebaseConfig';
 import Loader from '../general/Loader';
@@ -47,38 +48,53 @@ export default class Home extends React.Component {
     firebase
       .database()
       .ref('/tasks')
-      // .orderByChild('helping')
-      // .equalTo(true)
-      .once('value', (data) => {
-        const values = Object.values(data.val());
-        const tasksHelping = [];
-        const tasksNotHelping = [];
-        for (let i = 0; i < values.length; i += 1) {
-          if (values[i].helping) {
-            tasksHelping.push(values[i]);
-          } else {
-            tasksNotHelping.push(values[i]);
+      .orderByKey()
+      .on('value', (data) => {
+        // console.log(data.val());
+        if (data.val()) {
+          const values = Object.values(data.val());
+          const keys = Object.keys(data.val());
+
+          const tasksHelping = [];
+          const tasksNotHelping = [];
+          for (let i = 0; i < values.length; i += 1) {
+            values[i].id = keys[i];
+            if (values[i].helping) {
+              tasksHelping.push(values[i]);
+            } else {
+              tasksNotHelping.push(values[i]);
+            }
           }
+          this.setState({ tasksNotHelping, tasksHelping, loader: false });
+        } else {
+          this.setState({ loader: false });
         }
-        this.setState({ tasksNotHelping, tasksHelping, loader: false });
       });
   }
 
   render() {
-    // console.log(this.state.tasks);x
+    console.log(this.state.tasksHelping);
+    console.log(this.state.tasksNotHelping);
     const dataAccepted = [];
 
     if (this.state.tasksHelping.length > 0) {
       // console.log(this.state.tasks);
+
       for (let i = 0; i < this.state.tasksHelping.length; i += 1) {
-        dataAccepted.push(<Row title={this.state.tasksHelping[i].title} key={i} />);
+        dataAccepted.push(<Row
+          data={this.state.tasksHelping[i]}
+          key={i}
+        />);
       }
     }
 
     const dataNotAccepted = [];
     if (this.state.tasksNotHelping) {
       for (let i = 0; i < this.state.tasksNotHelping.length; i += 1) {
-        dataNotAccepted.push(<Row title={this.state.tasksNotHelping[i].title} key={i} />);
+        dataNotAccepted.push(<Row
+          data={this.state.tasksNotHelping[i]}
+          key={i}
+        />);
       }
     }
     if (this.state.loader) {
@@ -91,14 +107,19 @@ export default class Home extends React.Component {
     return (
       <Holder>
         <HolderTable>
-          <Head>
-            <Tag>GEACCEPTEERDE VERZOEKEN</Tag>{' '}
-            <TagAmount>({this.state.tasksHelping.length})</TagAmount>
-          </Head>
+          {this.state.tasksHelping.length > 0 && (
+            <Head>
+              <Tag>GEACCEPTEERDE VERZOEKEN</Tag>{' '}
+              <TagAmount>({this.state.tasksHelping.length})</TagAmount>
+            </Head>
+          )}
+
           {dataAccepted}
-          <Head>
-            <Tag>HULP VERZOEKEN</Tag> <TagAmount>({this.state.tasksNotHelping.length})</TagAmount>
-          </Head>
+          {this.state.tasksNotHelping.length > 0 && (
+            <Head>
+              <Tag>HULP VERZOEKEN</Tag> <TagAmount>({this.state.tasksNotHelping.length})</TagAmount>
+            </Head>
+          )}
           {dataNotAccepted}
         </HolderTable>
       </Holder>

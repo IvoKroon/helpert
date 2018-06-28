@@ -31,6 +31,19 @@
             animation: fadeOut 2s;
         }
 
+        .fadeIn {
+            opacity: 1;
+            -webkit-animation: fadein 2s;
+            /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein 2s;
+            /* Firefox < 16 */
+            -ms-animation: fadein 2s;
+            /* Internet Explorer */
+            -o-animation: fadein 2s;
+            /* Opera < 12.1 */
+            animation: fadein 2s;
+        }
+
         .image {
             object-fit: cover;
             border-radius: 50%;
@@ -102,6 +115,7 @@
         const load_screen = document.querySelector('#load_screen');
         let userId = 2;
         let open = false;
+        let key = null;
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyDYqRErL3PElxfLVbixNSdsF1Olgrr8zc0",
@@ -121,17 +135,29 @@
                 image.src = data.val().image;
             })
         }
+        getLast();
+        function getLast() {
+            firebase.database().ref('tasks').on('value', (data) => {
+                const value = data.val();
+                const keys = Object.keys(value);
+                key = keys[keys.length - 1];
+            })
+        }
 
         firebase.database().ref('selecter').on('value', (data) => {
-            // if (data.val().open === true && open === false) {
-            //     open = true;
             if (data.val().open === true && open === false) {
-                // load_screen.style.display = "none";
                 load_screen.classList.add("fadeOut");
+                load_screen.classList.remove("fadeIn")
             } else {
-                // load_screen.style.display = "flex";
-                // load_screen.classList.add("fadeIn");
+                load_screen.classList.add("fadeIn");
+                load_screen.classList.remove("fadeOut")
+            }
 
+            if (data.val().accepted) {
+                firebase.database().ref('tasks/' + key + '/').update({ helping: 2 }).then((data) => {
+                });
+                firebase.database().ref('selecter').update({ accepted: false }).then(() => {
+                });
             }
 
             const selct = data.val();

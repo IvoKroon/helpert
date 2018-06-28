@@ -127,6 +127,7 @@
         };
         firebase.initializeApp(config);
         getUser(userId);
+        console.log('dingen');
         function getUser(userId) {
             firebase.database().ref('Users/' + userId).once('value', (data) => {
                 console.log(data.val());

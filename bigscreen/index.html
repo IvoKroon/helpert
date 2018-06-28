@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: arial;
+        }
+
+        .fadeOut {
+            opacity: 0;
+            -webkit-animation: fadeOut 2s;
+            /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadeOut 2s;
+            /* Firefox < 16 */
+            -ms-animation: fadeOut 2s;
+            /* Internet Explorer */
+            -o-animation: fadeOut 2s;
+            /* Opera < 12.1 */
+            animation: fadeOut 2s;
+        }
+
+        .image {
+            object-fit: cover;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 200px;
+        }
+
+        .imageHolder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            background: #00ac5b;
+            ;
+        }
+
+        .name {
+            font-weight: 100;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            background: #061456;
+            text-align: center;
+            color: white;
+        }
+
+        .bio {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="load_screen" style="position:absolute; display:flex; justify-content:center; align-items:center; background:black; min-height: 100vh; min-width:100%;">
+        <img src="./logo.svg" />
+    </div>
+    <div class="imageHolder">
+        <img id="image" class="image" width="200" height="200" src="logo.svg">
+    </div>
+    <h1 class="name" id="user">BIGSCREEN</h1>
+    <h3 class="bio" id="bio">BIO</h3>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script>
+        const user = document.querySelector('#user');
+        const bio = document.querySelector('#bio');
+        const image = document.querySelector('#image');
+        const load_screen = document.querySelector('#load_screen');
+        let userId = 2;
+        let open = false;
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDYqRErL3PElxfLVbixNSdsF1Olgrr8zc0",
+            authDomain: "helpert-d587b.firebaseapp.com",
+            databaseURL: "https://helpert-d587b.firebaseio.com",
+            projectId: "helpert-d587b",
+            storageBucket: "helpert-d587b.appspot.com",
+            messagingSenderId: "423056047451"
+        };
+        firebase.initializeApp(config);
+        getUser(userId);
+        function getUser(userId) {
+            firebase.database().ref('Users/' + userId).once('value', (data) => {
+                console.log(data.val());
+                user.textContent = data.val().firstname + ' ' + data.val().lastname;
+                bio.textContent = data.val().bio;
+                image.src = data.val().image;
+            })
+        }
+
+        firebase.database().ref('selecter').on('value', (data) => {
+            // if (data.val().open === true && open === false) {
+            //     open = true;
+            if (data.val().open === true && open === false) {
+                // load_screen.style.display = "none";
+                load_screen.classList.add("fadeOut");
+            } else {
+                // load_screen.style.display = "flex";
+                // load_screen.classList.add("fadeIn");
+
+            }
+
+            const selct = data.val();
+            if (selct.next) {
+
+                if (userId < 3) {
+                    userId += 1;
+                } else {
+                    userId = 1;
+                }
+                getUser(userId);
+                //NEXT ACTION;
+                firebase.database().ref('selecter').update({ next: false }).then(() => {
+                })
+
+
+            }
+            if (selct.previous) {
+                //NEXT ACTION;
+                firebase.database().ref('selecter').update({ previous: false }).then(() => {
+                    // console.log('prev');
+                    if (userId > 1) {
+                        userId -= 1;
+                    } else {
+                        userId = 3;
+                    }
+                    getUser(userId);
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -8,7 +8,7 @@
     "build": "webpack",
     "build-babel": "build-babel-server && build-babel-client",
     "build-babel-server": "babel src/server --out-dir ./dist",
-    "build-babel-client": "babel src/client --copy-files --out-dir ./dist/public",
+    "build-babel-client": "babel src/ --copy-files --out-dir ./distBabel",
     "start": "node ./dist/server.js",
     "dev": "webpack-dev-server --config webpack.config.js --open --client-log-level warning"
   },
